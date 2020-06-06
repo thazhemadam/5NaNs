@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {BrowserRouter, Route} from 'react-router-dom';
+import {BrowserRouter, Route, Switch, Link, NavLink} from 'react-router-dom';
 //BrowserRouter will be used once.
 //Route will be used for each of the extra pages.
 import 'normalize.css/normalize.css';
 import './styles/styles.scss';
+
 
 const ExpenseDashboard = () => (
     <div>
@@ -30,13 +31,34 @@ const EditExpense = () => (
     </div>
 );
 
+const Page404 = () => (
+    <div>
+        404. Page not found.<br/>
+        <Link to='/'>Go home.</Link>
+    </div>
+);
+
+const Header = () => (
+    <header>
+        <h1>5NaNs</h1>
+        <NavLink to = '/' activeClassName="is-active" exact={true}> Dashboard </NavLink>
+        <NavLink to = '/edit' activeClassName="is-active"> Edit </NavLink>
+        <NavLink to = '/add' activeClassName="is-active"> Add </NavLink>
+        <NavLink to = '/help' activeClassName="is-active"> Help </NavLink>
+    </header>
+);
+
 const routes = (
     <BrowserRouter>
-        <div> 
-        <Route path = '/add' component = {AddExpense} exact={true}/>
-        <Route path = '/edit' component= {EditExpense} exact = {true} />
-        <Route path = '/help' component = {ExpenseHelp} exact={true} />
-        <Route path = '/' component = {ExpenseDashboard} exact={true}/>
+        <div>
+            <Route component = {Header} />
+            <Switch> 
+                <Route path = '/add' component = {AddExpense} />
+                <Route path = '/edit' component= {EditExpense} />
+                <Route path = '/help' component = {ExpenseHelp} />
+                <Route path = '/' component = {ExpenseDashboard} exact={true}/>
+                <Route component = {Page404} />
+            </Switch>
         </div>
     </BrowserRouter>
 );
