@@ -1,0 +1,23 @@
+html {
+    font-size: 62.5%;
+}
+
+::selection {
+    background-color: rgb(158, 216, 255);
+    color: white;
+}
+  
+//global font family
+body {
+    font-family: Helvetica, sans-serif, Arial;
+    font-size: $m-size;
+ 
+} 
+
+button {
+    cursor: pointer;
+}
+
+button:disabled{
+    cursor: default;
+}
