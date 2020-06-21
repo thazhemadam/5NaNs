@@ -1,7 +1,7 @@
 //ExpenseListFilters will help display the expenses in accordance with the filters, and sorting parameters provided.
 import React from 'react';
 import { connect } from 'react-redux';
-import {setTextFilter, sortByAmount, sortByDate} from '../actions/filters';
+import {setTextFilter, sortByAmount, sortByDate, sortAsc, sortDesc} from '../actions/filters';
 
 const ExpenseListFilters = (props) => (
     <div>
@@ -19,6 +19,18 @@ const ExpenseListFilters = (props) => (
             <option value = "date">Date</option>
             <option value = "amount">Amount</option> 
         </select>
+        <button onClick={(e) => {
+            if(props.filters.sortOrder ==='asc'){   
+                props.dispatch(sortDesc())
+            }
+            else if(props.filters.sortOrder === 'desc'){
+                props.dispatch(sortAsc())
+            }
+            
+        }}>
+           {props.filters.sortOrder==='asc'?'⬆':'⬇'}
+        </button>
+
     </div>
 );
 

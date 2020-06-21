@@ -1,6 +1,7 @@
 const filtersReducerDefaultState = {
     text: '',
     sortBy: 'date',
+    sortOrder: 'desc',
     startDate : undefined,
     endDate : undefined,
 };
@@ -23,6 +24,18 @@ export default (filterProperty = filtersReducerDefaultState, action) => {
             return {
                 ...filterProperty,
                 sortBy: 'amount'
+            }
+
+        case "SORT_ASCENDING":
+            return {
+                ...filterProperty,
+                sortOrder: 'asc'
+            }
+        
+        case "SORT_DESCENDING":
+            return {
+                ...filterProperty,
+                sortOrder: 'desc'
             }
 
         case "SET_START_DATE":

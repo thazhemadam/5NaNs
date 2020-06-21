@@ -1,5 +1,5 @@
 //Function that returns the expenses array that satisfy the filter conditions, and are sorted; all with respect to the state.
-export default (expenses, {text, sortBy, startDate, endDate}) => {
+export default (expenses, {text, sortBy, sortOrder, startDate, endDate}) => {
     return expenses.filter((eachExpense)=> {
         const startDateMatch = typeof startDate!== 'number' || (eachExpense.createdAt >= startDate )
         const endDateMatch = typeof endDate!== 'number' || (eachExpense.createdAt <= endDate)
@@ -7,11 +7,23 @@ export default (expenses, {text, sortBy, startDate, endDate}) => {
         return startDateMatch && endDateMatch && textMatch;
 
     }).sort((a, b)=> {
+
         if(sortBy === 'date'){
-            return a.createdAt < b.createdAt? 1: -1;
+            if(sortOrder === 'desc'){
+                return a.createdAt < b.createdAt? 1: -1;
+            } 
+            else if(sortOrder === 'asc'){
+                return a.createdAt > b.createdAt? 1: -1;
+            }
         }
-        else if(sortBy === 'amount'){
-            return a.amount < b.amount ? 1:-1;
+
+        else if(sortBy === 'amount'){    
+            if(sortOrder === 'desc'){
+                return a.amount < b.amount ? 1:-1;
+            } 
+            else if(sortOrder === 'asc'){
+                return a.amount > b.amount ? 1:-1;
+            }
         }
     });
 };
