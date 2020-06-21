@@ -1,4 +1,4 @@
-//Function that returns the expenses that satisfy the filter conditions, and are sorted; all with respect to the state.
+//Function that returns the expenses array that satisfy the filter conditions, and are sorted; all with respect to the state.
 export default (expenses, {text, sortBy, startDate, endDate}) => {
     return expenses.filter((eachExpense)=> {
         const startDateMatch = typeof startDate!== 'number' || (eachExpense.createdAt >= startDate )
