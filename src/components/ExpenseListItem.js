@@ -8,7 +8,6 @@ const ExpenseListItem = (props) => (
         <h3>{props.description}</h3>
         <p>{props.amount} - {props.createdAt}</p>
         <button onClick = {(e)=> {
-            console.log(props.id)
             props.dispatch(removeExpense(props))
         }}>Remove</button>
     </div>

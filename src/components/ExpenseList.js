@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import ExpenseListItem from './ExpenseListItem'
-import selectExpenses from '../selectors/visibleExpenses'
+import ExpenseListItem from './ExpenseListItem';
+import visibleExpenses from '../selectors/visibleExpenses';
 //Regular unconnected component
 const ExpenseList = (props) => (
     <div>
@@ -15,7 +15,9 @@ const ExpenseList = (props) => (
 //Function to map state and props
 const mapStateToProps = (state)=> {
     return {
-        expenses: selectExpenses(state.expenses, state.filters)
+        //The expenses property returned as a prop will be rendered as a HOC that renders ExpenseList.
+        //This DOES NOT change the original state/store. Only the required parameters passed as props will be changed.
+        expenses: visibleExpenses(state.expenses, state.filters)
     }
 }
 
