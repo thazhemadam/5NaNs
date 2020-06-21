@@ -1,12 +1,20 @@
 // Component for the Form which will be used in AddExpense and EditExpense.
 import React from 'react';
+import moment from 'moment';
+import {SingleDatePicker} from 'react-dates'
+import 'react-dates/initialize';
+import 'react-dates/lib/css/_datepicker.css'
 
+const now = moment();
+console.log(now.format())
 export default class ExpenseForm extends React.Component {
     //Local Component State of .
     state = {
         description: '',
         note:'',
-        amount:''
+        amount:'',
+        createdAt: moment(),
+        calenderFocus: false
     };
 
     onDescriptionChange = (e) => {
@@ -26,16 +34,43 @@ export default class ExpenseForm extends React.Component {
         }    
     }
 
+    onDateChange = (createdAt) => {
+        this.setState(()=> ({createdAt}))
+    }
+
+    onFocusChange = ({focused}) => {
+        this.setState(() => ({ calenderFocus: focused }))
+    }
+
     render(){
     return (
         <div>
             <form>
-                <input type="text" placeholder="Description" autoFocus value={this.state.description}
-                onChange={this.onDescriptionChange}
+                <input 
+                    type="text" 
+                    placeholder="Description" 
+                    autoFocus 
+                    value={this.state.description}
+                    onChange={this.onDescriptionChange}
                 />
-                <input type="text" placeholder = "Amount" value={this.state.amount} onChange={this.onAmountChange}/>
-                <textarea placeholder='Add a note for your response. (optional)' value={this.state.note}
+                <input 
+                    type="text" 
+                    placeholder = "Amount" 
+                    value={this.state.amount} 
+                    onChange={this.onAmountChange}
+                />
+                <SingleDatePicker 
+                    date={this.state.createdAt}
+                    onDateChange={this.onDateChange}
+                    focused={this.state.calenderFocus}
+                    onFocusChange={this.onFocusChange}
+                    numberOfMonths={1}
+                    isOutsideRange={()=> false}
+                />
+                <textarea 
+                    value={this.state.note}
                     onChange={this.onNoteChange} 
+                    
                 />
                 <button>Add Expense</button>
             </form>
