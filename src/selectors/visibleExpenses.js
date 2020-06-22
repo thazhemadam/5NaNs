@@ -1,8 +1,11 @@
+import moment from 'moment';
+
 //Function that returns the expenses array that satisfy the filter conditions, and are sorted; all with respect to the state.
 export default (expenses, {text, sortBy, sortOrder, startDate, endDate}) => {
     return expenses.filter((eachExpense)=> {
-        const startDateMatch = typeof startDate!== 'number' || (eachExpense.createdAt >= startDate )
-        const endDateMatch = typeof endDate!== 'number' || (eachExpense.createdAt <= endDate)
+        const createdAtMoment = moment(eachExpense.createdAt);
+        const startDateMatch = startDate ? startDate.isSameOrBefore(createdAtMoment, 'day') : true; 
+        const endDateMatch = endDate ? endDate.isSameOrAfter(createdAtMoment, 'day') : true; ;
         const textMatch = !text || eachExpense.description.toLowerCase().includes(text.toLowerCase())
         return startDateMatch && endDateMatch && textMatch;
 
