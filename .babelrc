@@ -1,9 +1,10 @@
 //Defining presets and plugins.
 {
     "presets": [
-        "env",
-        "react"
+        "@babel/preset-env",
+        "@babel/preset-react"
     ],
+ 
     "plugins": [
         "transform-class-properties",
         "transform-object-rest-spread"
