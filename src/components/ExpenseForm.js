@@ -1,7 +1,7 @@
 // Component for the Form which will be used in AddExpense and EditExpense.
 import React from 'react';
 import moment from 'moment';
-import {SingleDatePicker} from 'react-dates'
+import {SingleDatePicker} from 'react-dates';
 import 'react-dates/initialize';
 
 
@@ -14,7 +14,7 @@ export default class ExpenseForm extends React.Component {
             note: props.expense? props.expense.note : '',
             amount: props.expense? (props.expense.amount/100).toString() : '',
             createdAt: props.expense? moment(props.expense.createdAt) : moment(),
-            calenderFocus: false,
+            calendarFocus: false,
             error: ''
         };
     }
@@ -44,7 +44,7 @@ export default class ExpenseForm extends React.Component {
     }
 
     onFocusChange = ({focused}) => {
-        this.setState(() => ({ calenderFocus: focused }));
+        this.setState(() => ({ calendarFocus: focused }));
     }
 
     onSubmitExpenseForm = (e) => {
@@ -88,7 +88,7 @@ export default class ExpenseForm extends React.Component {
                 <SingleDatePicker 
                     date={this.state.createdAt}
                     onDateChange={this.onDateChange}
-                    focused={this.state.calenderFocus}
+                    focused={this.state.calendarFocus}
                     onFocusChange={this.onFocusChange}
                     numberOfMonths={1}
                     isOutsideRange={()=> false}
