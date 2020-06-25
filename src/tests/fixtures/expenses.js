@@ -5,7 +5,7 @@ export default [{
     description: 'Test Expense 1',
     note:'',
     amount: 69,
-    createdAt: moment(0)
+    createdAt: 0
 },{
     id: '2',
     description: 'Pseudo Price 2',
