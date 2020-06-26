@@ -3,14 +3,23 @@ import ExpenseForm from './ExpenseForm';
 import { connect } from 'react-redux';
 import { addExpense } from '../actions/expenses'
 
-const AddExpense = (props) => (
-    <div>
-        <h1>Add Expense Page</h1>
-        <ExpenseForm onSubmitDispatch = {(newExpense) => {
-            props.dispatch(addExpense(newExpense));
-            props.history.push('/');
-        }}/>
-    </div>
-);
+export class AddExpense extends React.Component {
+    onSubmitDispatch = (newExpense) => {
+        this.props.addExpense(newExpense);
+        this.props.history.push('/');
+    }
+    render(){
+        return (
+            <div>
+                <h1>Add Expense Page</h1>
+                <ExpenseForm onSubmitDispatch = {this.onSubmitDispatch}/>
+            </div>
+        );
+    }
+}
 
-export default connect()(AddExpense);
+const mapDispatchToProps = (dispatch) => ({
+        addExpense: (newExpense) => dispatch(addExpense(newExpense))   
+})
+
+export default connect(undefined, mapDispatchToProps)(AddExpense);
