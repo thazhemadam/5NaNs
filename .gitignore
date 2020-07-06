@@ -1,4 +1,3 @@
 node_modules/
 __snapshots__/
-public/*.js*
-public/*.css*
+public/dist
