@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { AddExpense } from '../../components/AddExpense';
+import { AddExpense } from '../../src/components/AddExpense';
 import testExpenses from '../fixtures/expenses';
 
 

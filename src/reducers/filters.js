@@ -4,10 +4,10 @@ const filtersReducerDefaultState = {
     text: '',
     sortBy: 'date',
     sortOrder: 'desc',
-    startDate: null,
-    endDate: null
-    // startDate : moment().startOf('month'),
-    // endDate : moment().endOf('month'),
+    // startDate: null,
+    // endDate: null
+    startDate : moment().startOf('month'),
+    endDate : moment().endOf('month'),
 };
 
 export default (filterProperty = filtersReducerDefaultState, action) => {

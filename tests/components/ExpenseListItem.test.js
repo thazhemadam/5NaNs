@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import testExpenses from '../fixtures/expenses';
-import ExpenseListItem from '../../components/ExpenseListItem';
+import ExpenseListItem from '../../src/components/ExpenseListItem';
 
 test('Render ExpenseListItem with fixture expense #1', () => {
     const wrapper = shallow(<ExpenseListItem {...testExpenses[0]}/>);

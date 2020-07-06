@@ -1,4 +1,4 @@
-import expensesReducer from '../../reducers/expenses';
+import expensesReducer from '../../src/reducers/expenses';
 import moment from 'moment';
 import testExpenses from '../fixtures/expenses';
 

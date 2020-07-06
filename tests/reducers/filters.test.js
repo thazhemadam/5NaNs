@@ -1,5 +1,5 @@
 import moment from 'moment';
-import filtersReducer from '../../reducers/filters';
+import filtersReducer from '../../src/reducers/filters';
 
 let defaultTestState = {
     text:'',

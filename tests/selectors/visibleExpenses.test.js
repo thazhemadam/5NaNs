@@ -1,5 +1,5 @@
 import moment from 'moment';
-import visibleExpenses from  '../../selectors/visibleExpenses';
+import visibleExpenses from  '../../src/selectors/visibleExpenses';
 import testExpenses from '../fixtures/expenses'
 
 const standardTestFilters = {

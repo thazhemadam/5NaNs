@@ -12,7 +12,7 @@ export default class ExpenseForm extends React.Component {
         this.state = {
             description: props.expense? props.expense.description : '',
             note: props.expense? props.expense.note : '',
-            amount: props.expense? (props.expense.amount/100).toString() : '',
+            amount: props.expense? (props.expense.amount).toString() : '',
             createdAt: props.expense? moment(props.expense.createdAt) : moment(),
             calendarFocus: false,
             error: ''
@@ -60,7 +60,7 @@ export default class ExpenseForm extends React.Component {
             //this.props.onSubmitDispatch refers to the function that is supposedly passed as a prop to the ExpenseForm component; which will be used to dispatch an action.
             this.props.onSubmitDispatch({
                 description: this.state.description,
-                amount: parseFloat(this.state.amount, 10)*100,
+                amount: parseFloat(this.state.amount, 10),
                 createdAt: this.state.createdAt.valueOf(),
                 note: this.state.note
             })
