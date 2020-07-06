@@ -5,15 +5,16 @@
 
 ### Build
 
-To build using webpack, run <br>
-```npm run build```
+*   **Development**:
+    Run ```npm run build:dev``` for a development level build.
+
+*   **Production**:
+    Run ```npm run build:prod``` for a production level build.
 
 ### Serving the assets
 
-To serve the directory up, run <br>
-`npm run dev-serve`
+To serve the directory up, run `npm run dev-serve`
 
 ### Testing
 
-To run the test suites created, run <br>
-`npm test`
+To run the test suites created, run `npm test`

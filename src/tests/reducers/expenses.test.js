@@ -29,6 +29,33 @@ test('Do not Remove Expense - Invalid ID', () => {
 
 test('Add Expense', () => {
     const addExpense = {
+        id: 5,
+        description: 'Extra One',
+        note: 'Add Expense test case from reducers/expenses.test.js',
+        amount: 1010101,
+        createdAt: moment(100)
+    };
+    const testAction = {
+        type: 'ADD_EXPENSE',
+        expense: addExpense
+    };
+    const testState = expensesReducer(testExpenses, testAction);
+    expect(testState).toEqual([...testExpenses, addExpense])
+});
+
+
+test('Remove Expense - Valid ID', () => {
+    const testAction = {
+        type: 'REMOVE_EXPENSE',
+        id: testExpenses[2].id
+    };
+    const testState = expensesReducer(testExpenses, testAction);
+    expect(testState).toEqual([testExpenses[0], testExpenses[1]]);
+});
+
+
+test('Add Expense', () => {
+    const addExpense = {
         id: 4,
         description: 'Another One',
         note: 'Add Expense test case from reducers/expenses.test.js',
