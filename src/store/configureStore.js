@@ -1,7 +1,11 @@
-import {createStore, combineReducers} from 'redux';
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import expenseReducer from '../reducers/expenses';
 import filtersReducer from '../reducers/filters';
+import thunk from 'redux-thunk'; 
+
 // The redux-store which records the state.
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 export default () => {
 
@@ -9,8 +13,7 @@ export default () => {
         expenses: expenseReducer,
         filters: filtersReducer
         }),
-        (!process.env.NODE_ENV || process.env.NODE_ENV!=='production') && window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-        //So that the store can be tracked using Redux devtools
+        composeEnhancers(applyMiddleware(thunk))        //So that the store can be tracked using Redux devtools
     );
     return store;
 }
