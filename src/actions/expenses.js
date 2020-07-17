@@ -20,7 +20,7 @@ export const startAddExpense = (expenseData = {}) => {
         // Bundle required attributes together in an object
         const expense = { description, note, amount, createdAt };
         
-        database.ref('expenses').push(expense).then((ref) => {
+        return database.ref('expenses').push(expense).then((ref) => {
             dispatch(addExpense({
                 id: ref.key,
                 ...expense
