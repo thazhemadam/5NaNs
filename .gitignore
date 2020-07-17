@@ -1,5 +1,5 @@
 node_modules/
 __snapshots__/
 public/dist
-firebase
-*.env
+.env*
+playground
