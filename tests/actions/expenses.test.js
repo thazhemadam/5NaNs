@@ -1,10 +1,18 @@
-import { addExpense, editExpense, removeExpense, startAddExpense } from '../../src/actions/expenses'
+import { addExpense, editExpense, removeExpense, startAddExpense, setExpenses, startSetExpenses } from '../../src/actions/expenses'
 import testExpenses from '../fixtures/expenses';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import database from '../../src/firebase/firebase';
 
 const createMockStore = configureMockStore([thunk]);
+
+beforeEach((done)=> {
+    const expensesTestData = {};
+    testExpenses.forEach(({id, description, note, amount, createdAt}) => {
+        expensesTestData[id] = {description, note, amount, createdAt };
+    });
+    database.ref('expenses').set(expensesTestData).then(() => done());
+});
 
 test('Generate action object - Remove Expense', () => {
     const action = removeExpense({id:'123abc'})
@@ -32,7 +40,7 @@ test('Generate action object - Add Expense - provided values', ()=> {
         type: 'ADD_EXPENSE',
         expense: testExpenses[2]
     });
-})
+});
 
 test('Add Expense to db and store - provided values', (done) => {
     const testStore = createMockStore({});
@@ -54,7 +62,7 @@ test('Add Expense to db and store - provided values', (done) => {
                 id: expect.any(String),
                 ...expenseTestData
             }
-        })
+        });
 
         return database.ref(`expenses/${actions[0].expense.id}`).once('value');
     }).then((snapshot) => {
@@ -87,6 +95,26 @@ test('Add expense to db and store - default values', (done) => {
         return (database.ref(`expenses/${actions[0].expense.id}`)).once('value');
     }).then((snapshot) => {
         expect(snapshot.val()).toEqual(expenseTestDefaultData);
+        done();
+    });
+});
+
+test('Generate action object - Set Expenses', () => {
+    const action = setExpenses(testExpenses);
+    expect(action).toEqual({
+        type: 'SET_EXPENSES',
+        expenses: testExpenses
+    });
+});
+
+test('Fetch Expenses from Firebase', (done) => {
+    const testStore = createMockStore({});
+    testStore.dispatch(startSetExpenses()).then(() => {
+        const actions = testStore.getActions();
+        expect(actions[0]).toEqual({
+            type: 'SET_EXPENSES',
+            expenses: testExpenses
+        });
         done();
     });
 });
