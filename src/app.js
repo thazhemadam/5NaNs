@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import configureStore from './store/configureStore';
 import {startSetExpenses} from './actions/expenses';
-import getVisibleExpenses from './selectors/visibleExpenses.js';
 import AppRouter from './routers/AppRouter';
 import 'normalize.css/normalize.css';
 import './styles/styles.scss';
@@ -11,10 +10,6 @@ import 'react-dates/lib/css/_datepicker.css';
 import './firebase/firebase';
 
 const store = configureStore();
-
-const {expenses, filters}  = store.getState();
-const visibleExpenses = getVisibleExpenses(expenses, filters);
-console.log(visibleExpenses);
 
 const jsx = (
     <Provider store={store}>

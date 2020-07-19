@@ -21,10 +21,7 @@ export default (expenseProperty = expensesReducerDefaultState, action) => {
             });
             
         case "SET_EXPENSES":
-            return action.expenses;
-
-        case "":
-            
+            return action.expenses;            
 
         default:
             return expenseProperty;
