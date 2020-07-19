@@ -33,6 +33,7 @@ export const removeExpense = ( {id} = {}) => ({
     id
 });
 
+// Remove chosen data from database, followed by making changes to the redux-store
 export const startRemoveExpense = ({ id } = {}) => {
     return (dispatch) => {
         return database.ref(`expenses/${id}`).remove().then(() => {
@@ -47,12 +48,20 @@ export const editExpense = (id, updates) => ({
     updates
 });
 
+export const startEditExpense = (id, updates) => {
+    return (dispatch) => {
+        return database.ref(`expenses/${id}`).update(updates).then(() => {
+            dispatch(editExpense(id, updates));
+        });
+    };
+};
+
 export const setExpenses =  (expenses) => ({
     type: 'SET_EXPENSES',
     expenses
 });
 
-// async function that fetches the data, and dispatches setExpenses
+// Fetches the data from Firebase, and dispatches setExpenses
 export const startSetExpenses = () => {
     return (dispatch) => {
         // Return the promise which is expected in app.js
