@@ -1,5 +1,6 @@
 import React from 'react';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {Router, Route, Switch} from 'react-router-dom';
+import createHistory from 'history/createBrowserHistory';
 import Dashboard from '../components/Dashboard';
 import AddExpense from '../components/AddExpense';
 import Help from '../components/Help';
@@ -8,8 +9,9 @@ import Page404 from '../components/Page404';
 import Header from '../components/Header';
 import Login from '../components/Login';
 
+export const history = createHistory();
 const AppRouter = () => (
-    <BrowserRouter>
+    <Router history={history}>
         <div>
             <Route component = {Header} />
             <Switch> 
@@ -21,7 +23,7 @@ const AppRouter = () => (
                 <Route component = {Page404} />
             </Switch>
         </div>
-    </BrowserRouter>
+    </Router>
 );
 
 export default AppRouter;
