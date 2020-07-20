@@ -13,6 +13,8 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import database from '../../src/firebase/firebase';
 
+const testUID = 'testUID00';
+const defaultAuthState = {auth: {uid: testUID}};
 const createMockStore = configureMockStore([thunk]);
 
 beforeEach((done)=> {
@@ -20,7 +22,7 @@ beforeEach((done)=> {
     testExpenses.forEach(({id, description, note, amount, createdAt}) => {
         expensesTestData[id] = {description, note, amount, createdAt };
     });
-    database.ref('expenses').set(expensesTestData).then(() => done());
+    database.ref(`users/${testUID}/expenses`).set(expensesTestData).then(() => done());
 });
 
 test('Generate action object - Remove Expense', () => {
@@ -52,7 +54,7 @@ test('Generate action object - Add Expense - provided values', ()=> {
 });
 
 test('Add Expense to db and store - provided values', (done) => {
-    const testStore = createMockStore({});
+    const testStore = createMockStore(defaultAuthState);
     const expenseTestData = {
         description: 'db & store add expense',
         amount: 1234,
@@ -73,7 +75,7 @@ test('Add Expense to db and store - provided values', (done) => {
             }
         });
 
-        return database.ref(`expenses/${actions[0].expense.id}`).once('value');
+        return database.ref(`users/${testUID}/expenses/${actions[0].expense.id}`).once('value');
     }).then((snapshot) => {
         //checks if testExpenseData is written to database database is
         expect(snapshot.val()).toEqual(expenseTestData);
@@ -82,7 +84,7 @@ test('Add Expense to db and store - provided values', (done) => {
 });
 
 test('Add expense to db and store - default values', (done) => {
-    const testStore = createMockStore({});
+    const testStore = createMockStore(defaultAuthState);
     const expenseTestDefaultData = {
         description: '',
         amount: 0,
@@ -101,7 +103,7 @@ test('Add expense to db and store - default values', (done) => {
             }
         });
 
-        return (database.ref(`expenses/${actions[0].expense.id}`)).once('value');
+        return (database.ref(`users/${testUID}/expenses/${actions[0].expense.id}`)).once('value');
     }).then((snapshot) => {
         expect(snapshot.val()).toEqual(expenseTestDefaultData);
         done();
@@ -117,7 +119,7 @@ test('Generate action object - Set Expenses', () => {
 });
 
 test('Fetch Expenses from Firebase', (done) => {
-    const testStore = createMockStore({});
+    const testStore = createMockStore(defaultAuthState);
     testStore.dispatch(startSetExpenses()).then(() => {
         const actions = testStore.getActions();
         expect(actions[0]).toEqual({
@@ -129,7 +131,7 @@ test('Fetch Expenses from Firebase', (done) => {
 });
 
 test('Remove Expense from Firebase', (done) => {
-    const testStore = createMockStore({});
+    const testStore = createMockStore(defaultAuthState);
     const id = testExpenses[2].id;
     testStore.dispatch(startRemoveExpense({ id })).then(() => {
         const actions = testStore.getActions();
@@ -137,7 +139,7 @@ test('Remove Expense from Firebase', (done) => {
             type: "REMOVE_EXPENSE",
             id
         });
-        return database.ref(`expenses/${id}`).once('value');
+        return database.ref(`users/${testUID}/expenses/${id}`).once('value');
     }).then((snapshot) => {
         expect(snapshot.val()).toBeFalsy();
         done();
@@ -145,7 +147,7 @@ test('Remove Expense from Firebase', (done) => {
 });
 
 test('Edit Expense on Firebase', (done) => {
-    const testStore = createMockStore({});
+    const testStore = createMockStore(defaultAuthState);
     const id = testExpenses[1].id;
     const updates = {amount: 666420};
     testStore.dispatch(startEditExpense(id, updates)).then(() => {
@@ -155,7 +157,7 @@ test('Edit Expense on Firebase', (done) => {
             id,
             updates
         });
-        return database.ref(`expenses/${id}`).once('value');
+        return database.ref(`users/${testUID}/expenses/${id}`).once('value');
     }).then((snapshot) => {
         expect(snapshot.val().amount).toBe(updates.amount);
         done();
