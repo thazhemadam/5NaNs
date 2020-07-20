@@ -3,3 +3,4 @@ __snapshots__/
 public/dist
 .env*
 playground
+bgs/
