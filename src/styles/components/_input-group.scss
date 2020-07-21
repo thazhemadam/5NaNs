@@ -10,10 +10,12 @@
 
 .input-group__item{
     margin-bottom: $s-size;
-    .input-group__item-order {
-        margin-left: $xs-size;
-    }
     @media(min-width: $desktop-breakpoint) {
         margin: 0 $s-size 0 0;
     }
+}
+
+.input-group__items {
+    display: inline-block;
+    white-space: nowrap;
 }

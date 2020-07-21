@@ -1,0 +1,25 @@
+.expense-form {
+    display: flex;
+    flex-direction: column;   
+
+    > * {
+        margin-bottom: $m-size;
+
+    }
+}
+
+.expense-form__error {
+    margin: 0 0 $m-size 0;
+    font-style: italic;
+    color: #b62121;
+}
+
+.expense-form__items {
+    display: flex;
+    .text-input {
+        @extend .text-input;
+        min-width: 0.1px;
+        flex-grow: 1;
+        margin-right: $xs-size;
+    }
+}

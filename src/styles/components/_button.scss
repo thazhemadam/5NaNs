@@ -1,5 +1,5 @@
 .button {
-    background: $green;
+    background: $button-pink;
     border: none;
     color: white;
     display: inline-block;
@@ -9,9 +9,14 @@
     padding: $s-size;
     border-radius: 10px;
     text-decoration: none;
+    margin-right: $s-size;
+    margin-bottom: $s-size;
   }
   
   .button--link {
     background: none;
   }
   
+  .button--secondary {
+    background: grey;
+  }

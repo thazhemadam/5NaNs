@@ -1,0 +1,24 @@
+.text-input {
+    border: 1px solid #cacccd;
+    height: 46px;
+    padding: $s-size;
+    font-size: $font-size-large;
+    font-weight: 200;
+}
+
+.input-group{
+    .select {
+        @extend .text-input;
+        background-color: $white;
+
+    }
+    .input-group__item-order {
+        @extend .text-input;
+        margin-left: $xs-size;
+    }
+}
+
+.textarea {
+    @extend .text-input;
+    height: 10rem;
+}

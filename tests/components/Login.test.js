@@ -10,6 +10,6 @@ test('Render Login Component', () => {
 test('Call startLogin on button click', () => {
   const startLogin = jest.fn();
   const wrapper = shallow(<Login startLogin={startLogin}/>);
-  wrapper.find('button').simulate('click');
+  wrapper.find('.google-btn').simulate('click');
   expect(startLogin).toHaveBeenCalled();
 });
