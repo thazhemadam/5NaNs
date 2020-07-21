@@ -9,6 +9,7 @@ import { startSetExpenses } from './actions/expenses';
 import { login, logout } from './actions/auth';
 import AppRouter, { history } from './routers/AppRouter';
 import { firebase } from './firebase/firebase';
+import LoadingPage from './components/LoadingPage';
 
 const store = configureStore();
 
@@ -18,7 +19,7 @@ const jsx = (
     </Provider>
 );
 
-ReactDOM.render(<p>Loading!</p>,document.getElementById('app'));
+ReactDOM.render(<LoadingPage />,document.getElementById('app'));
 let hasRendered = false;
 const renderApp = () => {
     if(!hasRendered) {
